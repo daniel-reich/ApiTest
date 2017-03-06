@@ -26,9 +26,9 @@ import java.util.ArrayList;
 
 public class GpsListener implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
-    private GoogleApiClient googleApiClient;
-    private LocationRequest locationRequest;
-    private FusedLocationProviderApi locationProvider = LocationServices.FusedLocationApi;
+    private static GoogleApiClient googleApiClient;
+    private static LocationRequest locationRequest;
+    private static FusedLocationProviderApi locationProvider = LocationServices.FusedLocationApi;
     private Context context;
     private ArrayList<Station> stations;
     private double currentLatitude;
@@ -59,11 +59,18 @@ public class GpsListener implements GoogleApiClient.ConnectionCallbacks, GoogleA
     }
 
     public void getLocationConnection() {
+        System.out.println("getLocationConnection in GpsListener");//////////////////////////
         googleApiClient.connect();
+        System.out.println("-Connection Status: "+googleApiClient.isConnected());/////////////
     }
 
     public void stopLocationConnection() {
-        googleApiClient.disconnect();
+        System.out.println("StopLocationConnection in GpsListener");//////////////////////////
+        if (googleApiClient!=null && googleApiClient.isConnected()) {
+            LocationServices.FusedLocationApi.removeLocationUpdates(googleApiClient, this);
+            googleApiClient.disconnect();
+            System.out.println("GPS updates stopped!");
+        }
     }
 
 
@@ -115,6 +122,8 @@ public class GpsListener implements GoogleApiClient.ConnectionCallbacks, GoogleA
                         suspendLong2 = stations.get(i).getLong2();
 
                         Intent intent = new Intent(context, com.theironyard.apitest.alarm_goes_off.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        intent.putParcelableArrayListExtra("stations", stations);
                         intent.putExtra("stationName", stations.get(i).getStationName());
                         intent.putExtra("ringtone", stations.get(i).getRingtoneUri().toString());
                         intent.putExtra("vibrate", stations.get(i).isVibrate());

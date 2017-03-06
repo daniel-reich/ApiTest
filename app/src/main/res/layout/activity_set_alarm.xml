@@ -10,33 +10,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.theironyard.apitest.set_alarm">
 
-    <Button
-        android:text="Add Alarm"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="33dp"
-        android:id="@+id/button3" />
-
-    <TextView
-        android:text="TextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textViewlong"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/button3"
-        android:layout_toEndOf="@+id/button3" />
-
-    <TextView
-        android:text="TextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textViewlat"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
     <!--<ListView
         android:layout_width="match_parent"
         android:layout_below="@+id/spinner"
@@ -50,18 +23,17 @@
         android:id="@+id/recycleView"
         android:layout_width="match_parent"
         android:layout_below="@+id/textViewlat"
-        android:layout_height="340dp">
+        android:layout_height="430dp">
 
     </android.support.v7.widget.RecyclerView>
 
-    <TextView
-        android:text="TextView"
+    <Button
+        android:text="Add Alarm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/button3"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="19dp"
-        android:id="@+id/textRing" />
+        android:id="@+id/button3"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 
 
 </RelativeLayout>

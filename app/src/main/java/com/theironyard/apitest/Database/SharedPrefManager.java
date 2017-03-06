@@ -7,6 +7,7 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import com.theironyard.apitest.Entities.Station;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class SharedPrefManager {
 
@@ -49,6 +50,17 @@ public class SharedPrefManager {
             Ringtone ringtone = RingtoneManager.getRingtone(context, savedStation.getRingtoneUri());
             savedStation.setRingtoneName(ringtone.getTitle(context));
 
+            //set days
+            savedStation.setSunday(setAlarms.getBoolean("sunday" +String.valueOf(i), false));
+            savedStation.setMonday(setAlarms.getBoolean("monday" +String.valueOf(i), true));
+            savedStation.setTuesday(setAlarms.getBoolean("tuesday" +String.valueOf(i), true));
+            savedStation.setWednesday(setAlarms.getBoolean("wednesday" +String.valueOf(i), true));
+            savedStation.setThursday(setAlarms.getBoolean("thursday" +String.valueOf(i), true));
+            savedStation.setFriday(setAlarms.getBoolean("friday" +String.valueOf(i), true));
+            savedStation.setSaturday(setAlarms.getBoolean("saturday" +String.valueOf(i), false));
+            savedStation.setHourOfDay(setAlarms.getInt("hour" +String.valueOf(i), Calendar.HOUR_OF_DAY));
+            savedStation.setMinute(setAlarms.getInt("minute" +String.valueOf(i), Calendar.MINUTE));
+            savedStation.setRadioChanged(setAlarms.getInt("radioChanged" +String.valueOf(i), 30));
             //save object in stations array
             stations.add(savedStation);
         }
@@ -65,6 +77,16 @@ public class SharedPrefManager {
             editor.putBoolean("isChecked" + String.valueOf(i), stations.get(i).isChecked());
             editor.putString("ringtoneUri" + String.valueOf(i), stations.get(i).getRingtoneUri().toString());
             editor.putBoolean("isVibrate" + String.valueOf(i), stations.get(i).isVibrate());
+            editor.putBoolean("sunday" + String.valueOf(i), stations.get(i).isSunday());
+            editor.putBoolean("monday" + String.valueOf(i), stations.get(i).isMonday());
+            editor.putBoolean("tuesday" + String.valueOf(i), stations.get(i).isTuesday());
+            editor.putBoolean("wednesday" + String.valueOf(i), stations.get(i).isWednesday());
+            editor.putBoolean("thursday" + String.valueOf(i), stations.get(i).isThursday());
+            editor.putBoolean("friday" + String.valueOf(i), stations.get(i).isFriday());
+            editor.putBoolean("saturday" + String.valueOf(i), stations.get(i).isSaturday());
+            editor.putInt("hour"+ String.valueOf(i), stations.get(i).getHourOfDay());
+            editor.putInt("minute"+ String.valueOf(i), stations.get(i).getMinute());
+            editor.putInt("radioChanged"+ String.valueOf(i), stations.get(i).getRadioChanged());
         }
 
         editor.putInt("numOfAlarms", stations.size());
@@ -72,12 +94,16 @@ public class SharedPrefManager {
 
     }
 
-    public void addAlarmtoSharedPreferencesMemory(String line, String station){
+    public void addAlarmtoSharedPreferencesMemory(String line, String station, int hour, int minute, int radioChanged){
         SharedPreferences setAlarms = context.getSharedPreferences("set_alarms", 0);
         SharedPreferences.Editor editor = setAlarms.edit();
         int stationId = databaseManager.getStationIdByLineAndStationName(line, station);
         editor.putInt(String.valueOf(setAlarms.getInt("numOfAlarms", 0)), stationId);
+        editor.putInt("hour" + setAlarms.getInt("numOfAlarms", 0), hour);
+        editor.putInt("minute" + setAlarms.getInt("numOfAlarms", 0), minute);
+        editor.putInt("radioChanged" + setAlarms.getInt("numOfAlarms", 0), radioChanged);
         editor.putInt("numOfAlarms", setAlarms.getInt("numOfAlarms", 0)+1);
+
         editor.commit();
     }
 
@@ -87,6 +113,20 @@ public class SharedPrefManager {
         SharedPreferences.Editor editor = setAlarms.edit();
 
         editor.remove(String.valueOf(station.getMemoryKey()));
+        editor.remove("isChecked"+String.valueOf(station.getMemoryKey()));
+        editor.remove("ringtoneUri"+String.valueOf(station.getMemoryKey()));
+        editor.remove("isVibrate"+String.valueOf(station.getMemoryKey()));
+        editor.remove("sunday"+String.valueOf(station.getMemoryKey()));
+        editor.remove("monday"+String.valueOf(station.getMemoryKey()));
+        editor.remove("tuesday"+String.valueOf(station.getMemoryKey()));
+        editor.remove("wednesday"+String.valueOf(station.getMemoryKey()));
+        editor.remove("thursday"+String.valueOf(station.getMemoryKey()));
+        editor.remove("friday"+String.valueOf(station.getMemoryKey()));
+        editor.remove("saturday"+String.valueOf(station.getMemoryKey()));
+        editor.remove("hour"+String.valueOf(station.getMemoryKey()));
+        editor.remove("minute"+String.valueOf(station.getMemoryKey()));
+        editor.remove("radioChanged"+String.valueOf(station.getMemoryKey()));
+        ///remove time
         editor.putInt("numOfAlarms", setAlarms.getInt("numOfAlarms", 0)-1);
         editor.commit();
     }

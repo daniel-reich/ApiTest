@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/custom_row_layout">
@@ -43,45 +44,205 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
         android:layout_below="@+id/addressText"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:id="@+id/expandable_view">
+        android:id="@+id/expandable_view"
+        android:layout_height="260dp">
+
+        <CheckBox
+            android:text="Vibrate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:id="@+id/vibrateCheckBox"
+            android:layout_alignBottom="@+id/ringtoneText"
+            android:layout_toRightOf="@+id/ringtoneText"
+            android:layout_toEndOf="@+id/ringtoneText"
+            />
+
+        <ToggleButton
+            android:text="Button"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:layout_alignBottom="@+id/wednesday"
+            android:layout_toRightOf="@+id/wednesday"
+            android:id="@+id/thursday"
+            android:background="@drawable/days_of_the_week"
+            android:textOn="T"
+            android:textOff="T"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:textSize="18sp"
+            android:textColor ="@drawable/days_of_the_week_text"/>
+
+        <ToggleButton
+            android:text="Button"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:layout_alignBottom="@+id/wednesday"
+            android:layout_toRightOf="@+id/thursday"
+            android:id="@+id/friday"
+            android:background="@drawable/days_of_the_week"
+            android:textOn="F"
+            android:textOff="F"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:textSize="18sp"
+            android:textColor ="@drawable/days_of_the_week_text"/>
+
+        <ToggleButton
+            android:text="Button"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:layout_alignBottom="@+id/wednesday"
+            android:layout_toRightOf="@+id/friday"
+            android:id="@+id/saturday"
+            android:background="@drawable/days_of_the_week"
+            android:textOn="S"
+            android:textOff="S"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:textSize="18sp"
+            android:textColor ="@drawable/days_of_the_week_text"/>
+
+        <TextView
+            android:text="TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/timeText"
+            android:textSize="20sp"
+            android:layout_marginTop="34dp"
+            android:layout_alignTop="@+id/plusOrMinusRadioGroup"
+            android:layout_toLeftOf="@+id/thursday"
+            android:layout_toStartOf="@+id/thursday" />
+
+        <TextView
+            android:text="Estimated Arrival Time:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView2"
+            android:layout_alignTop="@+id/plusOrMinusRadioGroup"
+            android:layout_toRightOf="@+id/monday"
+            android:layout_toEndOf="@+id/monday" />
+
+        <ToggleButton
+            android:text="Button"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:id="@+id/wednesday"
+            android:background="@drawable/days_of_the_week"
+            android:textOn="W"
+            android:textOff="W"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:textSize="18sp"
+            android:textColor ="@drawable/days_of_the_week_text"
+            android:layout_below="@+id/plusOrMinusRadioGroup"
+            android:layout_centerHorizontal="true" />
+
+        <ToggleButton
+            android:text="Button"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:id="@+id/tuesday"
+            android:background="@drawable/days_of_the_week"
+            android:textOn="T"
+            android:textOff="T"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:textSize="18sp"
+            android:textColor ="@drawable/days_of_the_week_text"
+            android:layout_alignBaseline="@+id/wednesday"
+            android:layout_alignBottom="@+id/wednesday"
+            android:layout_toLeftOf="@+id/wednesday"
+            android:layout_toStartOf="@+id/wednesday" />
+
+        <ToggleButton
+            android:text="Button"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:id="@+id/monday"
+            android:background="@drawable/days_of_the_week"
+            android:textOn="M"
+            android:textOff="M"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:textSize="18sp"
+            android:textColor ="@drawable/days_of_the_week_text"
+            android:layout_alignBaseline="@+id/wednesday"
+            android:layout_alignBottom="@+id/wednesday"
+            android:layout_toLeftOf="@+id/tuesday"
+            android:layout_toStartOf="@+id/tuesday" />
+
+        <ToggleButton
+            android:text="Button"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:id="@+id/sunday"
+            android:background="@drawable/days_of_the_week"
+            android:textOn="S"
+            android:textOff="S"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:textSize="18sp"
+            android:textColor ="@drawable/days_of_the_week_text"
+            android:layout_alignBaseline="@+id/wednesday"
+            android:layout_alignBottom="@+id/wednesday"
+            android:layout_toLeftOf="@+id/monday"
+            android:layout_toStartOf="@+id/monday" />
 
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="@android:drawable/ic_menu_delete"
             android:id="@+id/deleteButton"
-            android:layout_centerVertical="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginLeft="16dp"
-            android:layout_marginStart="16dp" />
+            android:layout_below="@+id/thursday"
+            android:layout_alignLeft="@+id/sunday"
+            android:layout_alignStart="@+id/sunday"
+            android:layout_marginTop="11dp" />
 
         <TextView
             android:text="TextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginStart="16dp"
             android:id="@+id/ringtoneText"
-            android:layout_centerVertical="true"
+            android:textSize="20sp"
             android:layout_toRightOf="@+id/deleteButton"
-            android:layout_toEndOf="@+id/deleteButton"
-            android:textSize="20sp"/>
+            android:layout_alignBottom="@+id/deleteButton"/>
 
-        <CheckBox
-            android:text="Vibrate"
+        <RadioGroup
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/ringtoneText"
-            android:layout_toEndOf="@+id/ringtoneText"
-            android:layout_marginLeft="12dp"
-            android:layout_marginStart="12dp"
-            android:id="@+id/vibrateCheckBox" />
+            android:id="@+id/plusOrMinusRadioGroup"
+            android:checkedButton="@+id/hello"
+            android:layout_marginTop="14dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignRight="@+id/saturday"
+            android:layout_alignEnd="@+id/saturday">
+
+            <RadioButton
+                android:text="+/- 15min"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/radio15"
+                android:layout_weight="1" />
+
+            <RadioButton
+                android:text="+/- 30min"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/radio30"
+                android:layout_weight="1" />
+
+            <RadioButton
+                android:text="+/- 60min"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/radio60"
+                android:layout_weight="1" />
+        </RadioGroup>
 
 
     </RelativeLayout>

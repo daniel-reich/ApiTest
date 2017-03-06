@@ -26,6 +26,12 @@
         <activity android:name=".alarm_goes_off" android:theme="@style/AppTheme.popUp">
 
         </activity>
+
+        <receiver android:name=".PendingIntents.StationListener" />
+        <receiver android:name=".PendingIntents.KillGpsListener" />
+        <service
+            android:name=".PendingIntents.StartGpsService"
+            android:exported="false"/>
     </application>
 
 </manifest>

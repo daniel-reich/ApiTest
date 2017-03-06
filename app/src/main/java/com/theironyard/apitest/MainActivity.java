@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-/*
+
 
         String[] urls = {"https://gentle-retreat-49936.herokuapp.com/getData/?transitNetworkName=TRAX"};
         String data = null;
@@ -63,15 +63,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } catch (JSONException e){
             output.setText("There was an error. (JSONException)");
         }
-*/
 
-        sharedPrefManager.setOpenedBefore();
-        Intent intent = new Intent(getApplicationContext(), com.theironyard.apitest.set_alarm.class);
-        startActivity(intent);
+
+
 
         //Preferences Memorey reset
         /*SharedPreferences setAlarms = getSharedPreferences("set_alarms" ,0);
         setAlarms.edit().clear().commit();*/
+
+        sharedPrefManager.setOpenedBefore();
+        Intent intent = new Intent(getApplicationContext(), com.theironyard.apitest.set_alarm.class);
+        startActivity(intent);
 
 
     }

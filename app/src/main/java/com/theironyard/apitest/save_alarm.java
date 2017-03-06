@@ -10,20 +10,30 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TimePicker;
 
 import com.theironyard.apitest.Database.DatabaseManager;
 import com.theironyard.apitest.Database.SharedPrefManager;
 
 import java.util.ArrayList;
 
-public class save_alarm extends AppCompatActivity implements View.OnClickListener {
+public class save_alarm extends AppCompatActivity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
 
     Spinner spinner2;
     Spinner spinner3;
     DatabaseManager databaseManager;
     Button button;
     SharedPrefManager sharedPrefManager;
+    TimePicker timePicker;
+    RadioButton radioButton15;
+    RadioButton radioButton30;
+    RadioButton radioButton60;
+    RadioGroup radioGroup;
+    int radioChanged = 30;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +43,18 @@ public class save_alarm extends AppCompatActivity implements View.OnClickListene
         spinner2 = (Spinner) findViewById(R.id.spinner2);
         spinner3 = (Spinner) findViewById(R.id.spinner3);
         button = (Button) findViewById(R.id.button2);
+        timePicker = (TimePicker) findViewById(R.id.timePicker);
+        radioButton15 = (RadioButton) findViewById(R.id.radioButton15);
+        radioButton30 = (RadioButton) findViewById(R.id.radioButton30);
+        radioButton60 = (RadioButton) findViewById(R.id.radioButton60);
+        radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
+        //radioButton30.setChecked(true);
+
         button.setOnClickListener(this);
+        radioButton15.setOnCheckedChangeListener(this);
+        radioButton30.setOnCheckedChangeListener(this);
+        radioButton60.setOnCheckedChangeListener(this);
+
         sharedPrefManager = new SharedPrefManager(this);
 
         databaseManager = new DatabaseManager(this);
@@ -86,11 +107,24 @@ public class save_alarm extends AppCompatActivity implements View.OnClickListene
 
     @Override
     public void onClick(View v){
+        int hour = timePicker.getCurrentHour();
+        int minute = timePicker.getCurrentMinute();
 
-        //Intent
-        sharedPrefManager.addAlarmtoSharedPreferencesMemory(spinner2.getSelectedItem().toString(), spinner3.getSelectedItem().toString());
+
+
+        sharedPrefManager.addAlarmtoSharedPreferencesMemory(spinner2.getSelectedItem().toString(), spinner3.getSelectedItem().toString(), hour, minute, radioChanged);
         Intent setIntent = new Intent(getApplicationContext(), com.theironyard.apitest.set_alarm.class);
         startActivity(setIntent);
     }
 
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        if (buttonView == radioButton15){
+            radioChanged = 15;
+        } else if (buttonView == radioButton30) {
+            radioChanged = 30;
+        } else if (buttonView == radioButton60) {
+            radioChanged = 60;
+        }
+    }
 }
